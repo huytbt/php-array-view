@@ -1,7 +1,5 @@
 <?php
 
-use ChickenCoder\Illuminate\View\Json;
-
 if (!function_exists('json_view')) {
     /**
      * Get the evaluated view contents for the given view.
