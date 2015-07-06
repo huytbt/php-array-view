@@ -1,6 +1,6 @@
 <?php
 
-namespace ChickenCoder\Illuminate\View;
+namespace ChickenCoder\Illuminate\JsonView;
 
 use Illuminate\Support\Facades\Facade as BaseFacade;
 

@@ -1,6 +1,6 @@
 <?php
 
-if (!function_exists('json_view')) {
+if (!function_exists('jsonView')) {
     /**
      * Get the evaluated view contents for the given view.
      *
@@ -9,14 +9,14 @@ if (!function_exists('json_view')) {
      * @param  array   $mergeData
      * @return \ChickenCoder\Illuminate\View\JsonFactory
      */
-    function json_view($view = null, $data = [], $mergeData = [])
+    function jsonView($view = null, $data = [], $mergeData = [])
     {
-        $jsonFactory = app('ChickenCoder\Illuminate\View\Factory');
+        $factory = app('ChickenCoder\Illuminate\JsonView\Contract');
 
         if (func_num_args() === 0) {
-            return $jsonFactory;
+            return $factory;
         }
 
-        return $jsonFactory->make($view, $data, $mergeData);
+        return $factory->make($view, $data, $mergeData);
     }
 }
