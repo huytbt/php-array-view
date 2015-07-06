@@ -28,11 +28,5 @@
         "psr-4": {
             "ChickenCoder\\Illuminate\\View\\": "src/Illuminate/View"
         }
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "1.0-dev"
-        }
-    },
-    "minimum-stability": "dev"
+    }
 }
