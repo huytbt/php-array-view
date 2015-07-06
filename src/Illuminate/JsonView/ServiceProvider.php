@@ -70,7 +70,7 @@ class ServiceProvider extends BaseServiceProvider
         // this case will be the Blade compiler, so we'll first create the compiler
         // instance to pass into the engine so it can compile the views properly.
         $app->singleton('json.compiler', function ($app) {
-            $cache = $app['config']['jsonView.compiled'];
+            $cache = $app['config']['view.compiled'];
 
             return new JsonCompiler($app['files'], $cache);
         });

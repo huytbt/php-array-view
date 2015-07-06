@@ -2,7 +2,7 @@
 
 namespace ChickenCoder\Illuminate\JsonView;
 
-interface Contract
+interface FactoryContract
 {
     /**
      * Determine if a given view exists.

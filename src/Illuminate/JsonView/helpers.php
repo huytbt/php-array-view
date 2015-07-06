@@ -11,7 +11,7 @@ if (!function_exists('jsonView')) {
      */
     function jsonView($view = null, $data = [], $mergeData = [])
     {
-        $factory = app('ChickenCoder\Illuminate\JsonView\Contract');
+        $factory = app('jsonView');
 
         if (func_num_args() === 0) {
             return $factory;

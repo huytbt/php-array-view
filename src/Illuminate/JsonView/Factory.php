@@ -8,11 +8,12 @@ use Illuminate\Support\Str;
 use InvalidArgumentException;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\View\Engines\EngineResolver;
+use Illuminate\View\ViewFinderInterface;
 use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Contracts\Container\Container;
-use ChickenCoder\Illuminate\JsonView\Contract as JsonViewContract;
+use ChickenCoder\Illuminate\JsonView\FactoryContract as JsonViewFactoryContract;
 
-class Factory implements JsonViewContract
+class Factory implements JsonViewFactoryContract
 {
     /**
      * The engine implementation.
@@ -68,7 +69,7 @@ class Factory implements JsonViewContract
      *
      * @var array
      */
-    protected $extensions = ['blade.php' => 'blade', 'php' => 'php'];
+    protected $extensions = ['json.php' => 'json', 'php' => 'php'];
 
     /**
      * The view composer events.
