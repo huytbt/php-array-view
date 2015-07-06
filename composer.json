@@ -1,0 +1,38 @@
+{
+    "name": "huytbt/laravel-json-view",
+    "description": "The Laravel JSON View.",
+    "keywords": ["view", "laravel"],
+    "support": {
+        "issues": "https://github.com/huytbt/laravel-json-view/issues",
+        "source": "https://github.com/huytbt/laravel-json-view"
+    },
+    "authors": [
+        {
+            "name": "Huy Ta",
+            "email": "huytbt@gmail.com"
+        }
+    ],
+    "license": "Apache-2.0",
+    "require": {
+        "php": ">=5.5.9"
+    },
+    "require-dev": {
+        "fzaninotto/faker": "~1.4",
+        "mockery/mockery": "~0.9.1",
+        "phpunit/phpunit": "~4.0"
+    },
+    "autoload": {
+        "files": [
+            "src/Illuminate/View/helpers.php"
+        ],
+        "psr-4": {
+            "ChickenCoder\\Illuminate\\View\\": "src/Illuminate/View"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    },
+    "minimum-stability": "dev"
+}
