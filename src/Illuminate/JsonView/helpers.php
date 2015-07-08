@@ -11,12 +11,18 @@ if (!function_exists('jsonView')) {
      */
     function jsonView($view = null, $data = [], $mergeData = [])
     {
-        $factory = app('jsonView');
+        static $factory;
+
+        if ($factory == null) {
+            $app = app();
+            $viewPaths = $app['config']['view.paths'];
+            $factory = new \ChickenCoder\Illuminate\JsonView\Factory($viewPaths);
+        }
 
         if (func_num_args() === 0) {
             return $factory;
         }
 
-        return $factory->make($view, $data, $mergeData);
+        return $factory->render($view, $data, $mergeData);
     }
 }
