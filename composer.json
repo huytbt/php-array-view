@@ -1,10 +1,10 @@
 {
-    "name": "huytbt/laravel-json-view",
-    "description": "The Laravel JSON View.",
-    "keywords": ["view", "laravel"],
+    "name": "huytbt/laravel-array-view",
+    "description": "The Laravel Array View.",
+    "keywords": ["laravel", "view", "array"],
     "support": {
-        "issues": "https://github.com/huytbt/laravel-json-view/issues",
-        "source": "https://github.com/huytbt/laravel-json-view"
+        "issues": "https://github.com/huytbt/laravel-array-view/issues",
+        "source": "https://github.com/huytbt/laravel-array-view"
     },
     "authors": [
         {
@@ -14,19 +14,17 @@
     ],
     "license": "Apache-2.0",
     "require": {
-        "php": ">=5.5.9"
+        "php": ">=5.4.0"
     },
     "require-dev": {
-        "fzaninotto/faker": "~1.4",
-        "mockery/mockery": "~0.9.1",
         "phpunit/phpunit": "~4.0"
     },
     "autoload": {
         "files": [
-            "src/Illuminate/JsonView/helpers.php"
+            "src/Illuminate/ArrayView/helpers.php"
         ],
         "psr-4": {
-            "ChickenCoder\\Illuminate\\JsonView\\": "src/Illuminate/JsonView"
+            "ChickenCoder\\Illuminate\\ArrayView\\": "src/Illuminate/ArrayView"
         }
     },
     "extra": {
