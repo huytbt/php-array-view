@@ -79,4 +79,9 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
     /**
      * ============================ Test Each Method ============================
      */
+    
+    public function testEach()
+    {
+        
+    }
 }
