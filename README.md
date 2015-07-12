@@ -1,4 +1,4 @@
-# Laravel Array View
+# Laravel Array View [![Build Status](https://travis-ci.org/huytbt/laravel-array-view.svg)](https://travis-ci.org/huytbt/laravel-array-view)
 
 An array view engine for the Laravel PHP framework.
 
