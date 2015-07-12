@@ -114,6 +114,14 @@ class Factory
             $this->results = $key;
             return;
         }
+
+        if ($value instanceof Closure) {
+            $factory = new Factory($this->viewPaths);
+            $value($factory);
+            $this->results[$key] = $factory->getResults();
+            return $this;
+        }
+
         $value === null && $value = json_decode("{}");
         $this->results[$key] = $value;
 
