@@ -102,4 +102,6 @@ views/article.array.php
 
 $this->set('title', $article->title);
 $this->set('author', $this->partial('partials/author', [ 'author' => $article->author ]));
+
+// [ 'title' => 'Example Title', 'author' => [ 'name' => 'John Doe', 'gender' => 'female' ] ]
 ```
