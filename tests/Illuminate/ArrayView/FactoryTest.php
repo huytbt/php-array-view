@@ -79,9 +79,26 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
     /**
      * ============================ Test Each Method ============================
      */
-    
-    public function testEach()
+
+    public function testEachWithEmptyArray()
     {
-        
+        $results = arrayView('testEach.test', [ 'numbers' => [] ]);
+        $this->assertNotEmpty($results);
+        $this->assertArrayHasKey('numbers', $results);
+        $this->assertInternalType('array', $results['numbers']);
+        $this->assertEquals(0, count($results['numbers']));
+    }
+
+    public function testEachWithArray()
+    {
+        $results = arrayView('testEach.test', [ 'numbers' => ['one', 'two'] ]);
+        $this->assertNotEmpty($results);
+        $this->assertArrayHasKey('numbers', $results);
+        $this->assertInternalType('array', $results['numbers']);
+        $this->assertEquals(2, count($results['numbers']));
+        $this->assertArrayHasKey('number', $results['numbers'][0]);
+        $this->assertEquals('one', $results['numbers'][0]['number']);
+        $this->assertArrayHasKey('number', $results['numbers'][1]);
+        $this->assertEquals('two', $results['numbers'][1]['number']);
     }
 }
