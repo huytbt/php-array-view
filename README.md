@@ -101,5 +101,5 @@ views/article.array.php
 <?php
 
 $this->set('title', $article->title);
-$this->set('author', $this->partial('views/partials/author', [ 'author' => $article->author ]));
+$this->set('author', $this->partial('partials/author', [ 'author' => $article->author ]));
 ```
