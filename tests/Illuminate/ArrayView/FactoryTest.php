@@ -8,6 +8,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
     {
         $author = new stdClass();
         $author->name = 'Huy Ta';
+        $author->gender = 'female';
 
         $article = new stdClass();
         $article->title = 'Array View';
@@ -100,5 +101,24 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('one', $results['numbers'][0]['number']);
         $this->assertArrayHasKey('number', $results['numbers'][1]);
         $this->assertEquals('two', $results['numbers'][1]['number']);
+    }
+
+    /**
+     * ============================ Test Partial Method ============================
+     */
+
+    public function testPartial()
+    {
+        $results = arrayView('testPartial.article', array(
+            'article'   => self::$objects['article'],
+        ));
+        $this->assertNotEmpty($results);
+        $this->assertArrayHasKey('title', $results);
+        $this->assertEquals(self::$objects['article']->title, $results['title']);
+        $this->assertArrayHasKey('author', $results);
+        $this->assertArrayHasKey('name', $results['author']);
+        $this->assertEquals(self::$objects['article']->author->name, $results['author']['name']);
+        $this->assertArrayHasKey('gender', $results['author']);
+        $this->assertEquals(self::$objects['article']->author->gender, $results['author']['gender']);
     }
 }
