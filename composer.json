@@ -1,6 +1,6 @@
 {
     "name": "huytbt/php-array-view",
-    "description": "PHP Array View.",
+    "description": "PHP Array View",
     "keywords": ["view", "array", "helper"],
     "support": {
         "issues": "https://github.com/huytbt/php-array-view/issues",
