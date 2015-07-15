@@ -1,6 +1,6 @@
 <?php
 
-namespace ChickenCoder\Illuminate\ArrayView;
+namespace ChickenCoder\ArrayView;
 
 use Closure;
 use InvalidArgumentException;
@@ -48,11 +48,9 @@ class Factory
     {
         $this->results = [];
 
-        $view = $this->normalizeName($view);
+        $viewPath = $this->getViewPath($view);
 
-        $path = $this->getViewPath($view);
-
-        if ($path === null) {
+        if ($viewPath === null) {
             throw new InvalidArgumentException("View [{$view}] not found");
         }
 
@@ -60,7 +58,7 @@ class Factory
 
         extract($data);
 
-        include($path . '/' . $view . '.' . $this->extension);
+        include($viewPath);
 
         return $this->results;
     }
@@ -68,18 +66,6 @@ class Factory
     public function getResults()
     {
         return $this->results;
-    }
-
-    /**
-     * Normalize a view name.
-     *
-     * @param  string $name
-     *
-     * @return string
-     */
-    protected function normalizeName($name)
-    {
-        return str_replace('.', '/', $name);
     }
 
     /**
@@ -93,7 +79,7 @@ class Factory
     {
         foreach ($this->viewPaths as $viewPath) {
             if (file_exists($viewPath . '/' . $view . '.' . $this->extension)) {
-                return $viewPath;
+                return $viewPath . '/' . $view . '.' . $this->extension;
             }
         }
 

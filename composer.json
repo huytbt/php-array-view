@@ -1,10 +1,10 @@
 {
-    "name": "huytbt/laravel-array-view",
-    "description": "The Laravel Array View.",
-    "keywords": ["laravel", "view", "array"],
+    "name": "huytbt/php-array-view",
+    "description": "The PHP Array View.",
+    "keywords": ["view", "array", "helper"],
     "support": {
-        "issues": "https://github.com/huytbt/laravel-array-view/issues",
-        "source": "https://github.com/huytbt/laravel-array-view"
+        "issues": "https://github.com/huytbt/php-array-view/issues",
+        "source": "https://github.com/huytbt/php-array-view"
     },
     "authors": [
         {
@@ -20,11 +20,8 @@
         "phpunit/phpunit": "~4.0"
     },
     "autoload": {
-        "files": [
-            "src/Illuminate/ArrayView/helpers.php"
-        ],
         "psr-4": {
-            "ChickenCoder\\Illuminate\\ArrayView\\": "src/Illuminate/ArrayView"
+            "ChickenCoder\\ArrayView\\": "src/ArrayView"
         }
     },
     "extra": {

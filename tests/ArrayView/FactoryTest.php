@@ -7,11 +7,11 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
     public static function setUpBeforeClass()
     {
         $author = new stdClass();
-        $author->name = 'Huy Ta';
-        $author->gender = 'female';
+        $author->name = 'John Doe';
+        $author->gender = 'male';
 
         $article = new stdClass();
-        $article->title = 'Array View';
+        $article->title = 'Example Title';
         $article->author = $author;
         self::$objects['article'] = $article;
     }
@@ -31,7 +31,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 
     public function testSetValueToKey()
     {
-        $results = arrayView('testSet.setValue', array(
+        $results = arrayView('testSet/setValue', array(
             'title'   => 'Example',
         ));
         $this->assertNotEmpty($results);
@@ -43,7 +43,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 
     public function testSetValueIsFunction()
     {
-        $results = arrayView('testSet.setFunction', array(
+        $results = arrayView('testSet/setFunction', array(
             'author'   => 'John Doe',
         ));
         $this->assertNotEmpty($results);
@@ -56,7 +56,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 
     public function testSetWithoutKey()
     {
-        $results = arrayView('testSet.setWithoutKey', array(
+        $results = arrayView('testSet/setWithoutKey', array(
             'author'   => 'John Doe',
         ));
         $this->assertNotEmpty($results);
@@ -66,7 +66,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 
     public function testSetUseObject()
     {
-        $results = arrayView('testSet.article', array(
+        $results = arrayView('testSet/article', array(
             'article'   => self::$objects['article'],
         ));
         $this->assertNotEmpty($results);
@@ -83,7 +83,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 
     public function testEachWithEmptyArray()
     {
-        $results = arrayView('testEach.test', [ 'numbers' => [] ]);
+        $results = arrayView('testEach/test', [ 'numbers' => [] ]);
         $this->assertNotEmpty($results);
         $this->assertArrayHasKey('numbers', $results);
         $this->assertInternalType('array', $results['numbers']);
@@ -92,7 +92,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 
     public function testEachWithArray()
     {
-        $results = arrayView('testEach.test', [ 'numbers' => ['one', 'two'] ]);
+        $results = arrayView('testEach/test', [ 'numbers' => ['one', 'two'] ]);
         $this->assertNotEmpty($results);
         $this->assertArrayHasKey('numbers', $results);
         $this->assertInternalType('array', $results['numbers']);
@@ -109,7 +109,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 
     public function testPartial()
     {
-        $results = arrayView('testPartial.article', array(
+        $results = arrayView('testPartial/article', array(
             'article'   => self::$objects['article'],
         ));
         $this->assertNotEmpty($results);
