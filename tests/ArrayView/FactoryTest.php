@@ -121,4 +121,25 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
         $this->assertArrayHasKey('gender', $results['author']);
         $this->assertEquals(self::$objects['article']->author->gender, $results['author']['gender']);
     }
+
+    /**
+     * ============================ Test Extract Method ============================
+     */
+
+    public function testExtract()
+    {
+        $results = arrayView('testExtract/test', array(
+            'article'   => [
+                'title' => 'Example Title',
+                'body' => 'Example Body',
+                'created' => '2015-07-16'
+            ]
+        ));
+        $this->assertNotEmpty($results);
+        $this->assertArrayHasKey('title', $results);
+        $this->assertEquals('Example Title', $results['title']);
+        $this->assertArrayHasKey('created', $results);
+        $this->assertEquals('2015-07-16', $results['created']);
+        $this->assertArrayNotHasKey('body', $results);
+    }
 }

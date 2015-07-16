@@ -91,7 +91,7 @@ class Factory
      * 
      * @param  string $key   Key
      * @param  mix    $value Value
-     * @return ChickenCoder\Illuminate\ArrayView\Factory $this
+     * @return ChickenCoder\ArrayView\Factory $this
      * @author HuyTBT <huytbt@gmail.com>
      */
     protected function set($key, $value = null)
@@ -140,7 +140,7 @@ class Factory
      * @param  string $partialView Partial view
      * @param  array  $data        Data
      * @param  array  $mergeData   Merge data
-     * @return ChickenCoder\Illuminate\ArrayView\Factory $partial
+     * @return ChickenCoder\ArrayView\Factory
      * @author HuyTBT <huytbt@gmail.com>
      */
     protected function partial($partialView, $data = [], $mergeData = [])
@@ -148,5 +148,25 @@ class Factory
         $factory = new Factory($this->viewPaths);
 
         return $factory->render($partialView, $data, $mergeData);
+    }
+
+    /**
+     * Extract data
+     * 
+     * @param  array $data
+     * @param  array $fields
+     * @return ChickenCoder\ArrayView\Factory
+     */
+    public function extract($data = [], $fields = [])
+    {
+        foreach ($fields as $field) {
+            if (isset($data[$field])) {
+                $this->set($field, $data[$field]);
+            } else {
+                $this->set($field, null);
+            }
+        }
+
+        return $this;
     }
 }
