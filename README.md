@@ -120,7 +120,20 @@ $this->set('numbers', $this->each($numbers, function ($section, $item) {
 ```
 
 ### extract()
-`Coming soon`
+It extracts values from an object and assigns them to the result object:
+```php
+<?php
+
+$article = [
+    'title' => 'Example Title',
+    'body' => 'Example Body',
+    'created' => '2015-07-16'
+];
+
+$this->extract($article, ['title', 'created']);
+
+// => [ 'title' => 'Example Title', 'created' => '2015-07-16' ]
+```
 
 ### helper()
 `Coming soon`
