@@ -8,14 +8,7 @@ before_script:
   - composer install --prefer-source --no-interaction --dev
 
 script:
-  # - vendor/bin/phpcs --report=checkstyle --report-file=build/logs/checkstyle.xml --standard=build/config/phpcs.xml --ignore=*.html.php,*.config.php,*.twig.php src
-  # - vendor/bin/phpmd src xml build/config/phpmd.xml --reportfile build/logs/pmd.xml
   - vendor/bin/phpunit --configuration phpunit.xml
-  # - php travis/junit.php
-
-# after_script:
-  # - php travis/checkstyle.php
-  # - php travis/pmd.php
 
 notifications:
   on_success: always
