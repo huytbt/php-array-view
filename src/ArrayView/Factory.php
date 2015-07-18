@@ -97,6 +97,7 @@ class Factory
     protected function set($key, $value = null)
     {
         if (func_num_args() === 1) {
+            $key === '{}' && $key = json_decode('{}');
             $this->results = $key;
             return;
         }
