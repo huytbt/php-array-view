@@ -39,6 +39,8 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Example', $results['title']);
         $this->assertArrayHasKey('version', $results);
         $this->assertEquals('1.0', $results['version']);
+        $this->assertEquals(null, $results['description']);
+        $this->assertInternalType('object', $results['author']);
     }
 
     public function testSetValueIsFunction()

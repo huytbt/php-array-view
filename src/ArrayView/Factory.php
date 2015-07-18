@@ -108,7 +108,7 @@ class Factory
             return $this;
         }
 
-        $value === null && $value = json_decode("{}");
+        $value === '{}' && $value = json_decode('{}');
         $this->results[$key] = $value;
 
         return $this;
