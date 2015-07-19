@@ -18,7 +18,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException InvalidArgumentException
-     * @expectedExceptionMessage View [viewNotFound] not found
+     * @expectedExceptionMessage View [viewNotFound] not found.
      */
     public function testViewNotFound()
     {
@@ -143,5 +143,41 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
         $this->assertArrayHasKey('created', $results);
         $this->assertEquals('2015-07-16', $results['created']);
         $this->assertArrayNotHasKey('body', $results);
+    }
+
+    /**
+     * ============================ Test Helper Method ============================
+     */
+
+    /**
+     * @expectedException InvalidArgumentException
+     * @expectedExceptionMessage Helper [abcdef] not found.
+     */
+    public function testHelperNotFound()
+    {
+        $results = arrayView('testHelper/testNotFound', array(
+            'title' => 'example title'
+        ));
+    }
+
+    public function testHelper()
+    {
+        $results = arrayView('testHelper/test', array(
+            'title' => 'example title'
+        ));
+        $this->assertNotEmpty($results);
+        $this->assertArrayHasKey('title', $results);
+        $this->assertEquals('EXAMPLE TITLE', $results['title']);
+    }
+
+    /**
+     * @expectedException BadFunctionCallException
+     * @expectedExceptionMessage Helper [helperInvalid] does not contain function [helper_helperInvalid()].
+     */
+    public function testHelperInvalid()
+    {
+        $results = arrayView('testHelper/testHelperInvalid', array(
+            'title' => 'example title'
+        ));
     }
 }

@@ -4,6 +4,7 @@ namespace ChickenCoder\ArrayView;
 
 use Closure;
 use InvalidArgumentException;
+use BadFunctionCallException;
 
 class Factory
 {
@@ -11,6 +12,7 @@ class Factory
      * The view paths.
      */
     protected $viewPaths = [];
+
     /**
      * The extension to engine bindings.
      *
@@ -51,7 +53,7 @@ class Factory
         $viewPath = $this->getViewPath($view);
 
         if ($viewPath === null) {
-            throw new InvalidArgumentException("View [{$view}] not found");
+            throw new InvalidArgumentException("View [{$view}] not found.");
         }
 
         $data = array_merge($mergeData, $data);
@@ -80,6 +82,24 @@ class Factory
         foreach ($this->viewPaths as $viewPath) {
             if (file_exists($viewPath . '/' . $view . '.' . $this->extension)) {
                 return $viewPath . '/' . $view . '.' . $this->extension;
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * Get path of helper
+     * 
+     * @param  string $view View
+     * @return string       View Path
+     * @author HuyTBT <huytbt@gmail.com>
+     */
+    protected function getHelperPath($helper)
+    {
+        foreach ($this->viewPaths as $viewPath) {
+            if (file_exists($viewPath . '/helpers/' . $helper . '.helper.php')) {
+                return $viewPath . '/helpers/' . $helper . '.helper.php';
             }
         }
 
@@ -169,5 +189,31 @@ class Factory
         }
 
         return $this;
+    }
+
+    /**
+     * Helper method
+     * 
+     * @param  string $helper
+     * @return mix
+     */
+    public function helper($helper)
+    {
+        $helperPath = $this->getHelperPath($helper);
+
+        if ($helperPath === null) {
+            throw new InvalidArgumentException("Helper [{$helper}] not found.");
+        }
+
+        $args = func_get_args();
+        unset($args[0]);
+
+        include_once $helperPath;
+
+        if (!function_exists("helper_{$helper}")) {
+            throw new BadFunctionCallException("Helper [{$helper}] does not contain function [helper_{$helper}()].");
+        }
+
+        return call_user_func_array("helper_{$helper}", $args);
     }
 }

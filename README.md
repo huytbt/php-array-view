@@ -136,7 +136,24 @@ $this->extract($article, ['title', 'created']);
 ```
 
 ### helper()
-`Coming soon`
+Helpers can be registered through the engine.
+views/helpers/uppercase.helper.php
+```php
+<?php
+
+function helper_uppercase($text)
+{
+    return strtoupper($text);
+}
+```
+views/atricle.array.php
+```php
+<?php
+
+$this->set('title', $this->helper('uppercase', $title));
+
+// [ 'title' => 'EXAMPLE TITLE' ]
+```
 
 ### partial()
 views/partials/author.array.php
