@@ -1,4 +1,6 @@
-# PHP Array View [![Build Status](https://travis-ci.org/huytbt/php-array-view.svg)](https://travis-ci.org/huytbt/php-array-view)
+# PHP Array View
+
+[![Build Status](https://travis-ci.org/huytbt/php-array-view.svg)](https://travis-ci.org/huytbt/php-array-view)
 
 An array view engine for PHP.
 
