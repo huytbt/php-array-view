@@ -33,9 +33,33 @@ class Factory
      * @param  array $viewPaths
      * @return void
      */
-    public function __construct($viewPaths)
+    public function __construct($viewPaths = [])
     {
         $this->viewPaths = $viewPaths;
+    }
+
+    /**
+     * Set view paths
+     * 
+     * @param  string $view View
+     * @return string       View Path
+     * @author HuyTBT <huytbt@gmail.com>
+     */
+    public function setViewPaths($viewPaths = [])
+    {
+        $this->viewPaths = $viewPaths;
+    }
+
+    /**
+     * Get view paths
+     * 
+     * @param  string $view View
+     * @return string       View Path
+     * @author HuyTBT <huytbt@gmail.com>
+     */
+    public function getViewPaths()
+    {
+        return $this->viewPaths;
     }
 
     /**

@@ -25,6 +25,14 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
         $results = arrayView('viewNotFound');
     }
 
+    public function testSetViewPaths()
+    {
+        $factory = new ChickenCoder\ArrayView\Factory;
+        $this->assertEquals([], $factory->getViewPaths());
+        $factory->setViewPaths([__DIR__]);
+        $this->assertEquals([__DIR__], $factory->getViewPaths());
+    }
+
     /**
      * ============================ Test Set Method ============================
      */
