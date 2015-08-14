@@ -232,12 +232,12 @@ class Factory
         $args = func_get_args();
         unset($args[0]);
 
-        include_once $helperPath;
+        $callback = include($helperPath);
 
-        if (!function_exists("helper_{$helper}")) {
-            throw new BadFunctionCallException("Helper [{$helper}] does not contain function [helper_{$helper}()].");
+        if (!is_callable($callback)) {
+            throw new BadFunctionCallException("Helper [{$helper}] is invalid.");
         }
 
-        return call_user_func_array("helper_{$helper}", $args);
+        return call_user_func_array($callback, $args);
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-function helper_uppercase($text)
-{
+return function ($text) {
+
     return strtoupper($text);
-}
+};

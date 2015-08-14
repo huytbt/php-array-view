@@ -180,7 +180,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException BadFunctionCallException
-     * @expectedExceptionMessage Helper [helperInvalid] does not contain function [helper_helperInvalid()].
+     * @expectedExceptionMessage Helper [helperInvalid] is invalid.
      */
     public function testHelperInvalid()
     {

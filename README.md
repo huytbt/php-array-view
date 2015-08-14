@@ -143,10 +143,11 @@ views/helpers/uppercase.helper.php
 ```php
 <?php
 
-function helper_uppercase($text)
+return function ($text)
 {
     return strtoupper($text);
-}
+};
+
 ```
 views/atricle.array.php
 ```php
