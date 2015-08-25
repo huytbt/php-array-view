@@ -103,6 +103,12 @@ class Factory
      */
     protected function getViewPath($view)
     {
+        if (file_exists($view)) {
+            return $view;
+        } elseif (file_exists($view . '.' . $this->extension)) {
+            return $view . '.' . $this->extension;
+        }
+
         foreach ($this->viewPaths as $viewPath) {
             if (file_exists($viewPath . '/' . $view . '.' . $this->extension)) {
                 return $viewPath . '/' . $view . '.' . $this->extension;
@@ -121,6 +127,12 @@ class Factory
      */
     protected function getHelperPath($helper)
     {
+        if (file_exists($helper)) {
+            return $helper;
+        } elseif (file_exists($helper . '.helper.php')) {
+            return $helper . '.helper.php';
+        }
+
         foreach ($this->viewPaths as $viewPath) {
             if (file_exists($viewPath . '/helpers/' . $helper . '.helper.php')) {
                 return $viewPath . '/helpers/' . $helper . '.helper.php';

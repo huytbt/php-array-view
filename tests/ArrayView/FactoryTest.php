@@ -87,6 +87,30 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(self::$objects['article']->author->name, $results['author']['name']);
     }
 
+    public function testUseViewDirectViewFolder()
+    {
+        $results = arrayView(__DIR__.'/../otherViews/test.array.php', array(
+            'article'   => self::$objects['article'],
+        ));
+        $this->assertNotEmpty($results);
+        $this->assertArrayHasKey('title', $results);
+        $this->assertEquals(self::$objects['article']->title, $results['title']);
+        $this->assertArrayHasKey('author', $results);
+        $this->assertArrayHasKey('name', $results['author']);
+        $this->assertEquals(self::$objects['article']->author->name, $results['author']['name']);
+
+        // have not extension
+        $results = arrayView(__DIR__.'/../otherViews/test', array(
+            'article'   => self::$objects['article'],
+        ));
+        $this->assertNotEmpty($results);
+        $this->assertArrayHasKey('title', $results);
+        $this->assertEquals(self::$objects['article']->title, $results['title']);
+        $this->assertArrayHasKey('author', $results);
+        $this->assertArrayHasKey('name', $results['author']);
+        $this->assertEquals(self::$objects['article']->author->name, $results['author']['name']);
+    }
+
     /**
      * ============================ Test Each Method ============================
      */
@@ -176,6 +200,24 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
         $this->assertNotEmpty($results);
         $this->assertArrayHasKey('title', $results);
         $this->assertEquals('EXAMPLE TITLE', $results['title']);
+    }
+
+    public function testUserHelperDirectViewFolder()
+    {
+        $results = arrayView(__DIR__.'/../otherViews/helper.array.php', array(
+            'title' => 'EXAMPLE TITLE'
+        ));
+        $this->assertNotEmpty($results);
+        $this->assertArrayHasKey('title', $results);
+        $this->assertEquals('example title', $results['title']);
+
+        // have not extension
+        $results = arrayView(__DIR__.'/../otherViews/helper', array(
+            'title' => 'EXAMPLE TITLE'
+        ));
+        $this->assertNotEmpty($results);
+        $this->assertArrayHasKey('title2', $results);
+        $this->assertEquals('example title', $results['title2']);
     }
 
     /**
