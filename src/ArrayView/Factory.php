@@ -14,6 +14,11 @@ class Factory
     protected $viewPaths = [];
 
     /**
+     * Factory dependency injection
+     */
+    protected $factoryDI = null;
+
+    /**
      * The extension to engine bindings.
      *
      * @var array
@@ -33,9 +38,10 @@ class Factory
      * @param  array $viewPaths
      * @return void
      */
-    public function __construct($viewPaths = [])
+    public function __construct($viewPaths = [], $factoryDI = null)
     {
         $this->viewPaths = $viewPaths;
+        $this->factoryDI = $factoryDI;
     }
 
     /**
@@ -89,9 +95,24 @@ class Factory
         return $this->results;
     }
 
+    /**
+     * Get results
+     *
+     * @return array
+     */
     public function getResults()
     {
         return $this->results;
+    }
+
+    /**
+     * Set result
+     *
+     * @param array $results
+     */
+    public function setResults($results = [])
+    {
+        $this->results = $results;
     }
 
     /**
@@ -101,7 +122,7 @@ class Factory
      * @return string       View Path
      * @author HuyTBT <huytbt@gmail.com>
      */
-    protected function getViewPath($view)
+    public function getViewPath($view)
     {
         if (file_exists($view)) {
             return $view;
@@ -125,7 +146,7 @@ class Factory
      * @return string       View Path
      * @author HuyTBT <huytbt@gmail.com>
      */
-    protected function getHelperPath($helper)
+    public function getHelperPath($helper)
     {
         if (file_exists($helper)) {
             return $helper;
@@ -150,7 +171,7 @@ class Factory
      * @return ChickenCoder\ArrayView\Factory $this
      * @author HuyTBT <huytbt@gmail.com>
      */
-    protected function set($key, $value = null)
+    public function set($key, $value = null)
     {
         if (func_num_args() === 1) {
             $key === '{}' && $key = json_decode('{}');
@@ -159,7 +180,7 @@ class Factory
         }
 
         if ($value instanceof Closure) {
-            $factory = new Factory($this->viewPaths);
+            $factory = $this->getFactory();
             $value($factory);
             $this->results[$key] = $factory->getResults();
             return $this;
@@ -179,9 +200,9 @@ class Factory
      * @return array
      * @author HuyTBT <huytbt@gmail.com>
      */
-    protected function each($data = [], Closure $callback)
+    public function each($data = [], Closure $callback)
     {
-        $factory = new Factory($this->viewPaths);
+        $factory = $this->getFactory();
         $results = array();
         foreach ($data as $item) {
             $callback($factory, $item);
@@ -200,9 +221,9 @@ class Factory
      * @return ChickenCoder\ArrayView\Factory
      * @author HuyTBT <huytbt@gmail.com>
      */
-    protected function partial($partialView, $data = [], $mergeData = [])
+    public function partial($partialView, $data = [], $mergeData = [])
     {
-        $factory = new Factory($this->viewPaths);
+        $factory = $this->getFactory();
 
         return $factory->render($partialView, $data, $mergeData);
     }
@@ -251,5 +272,21 @@ class Factory
         }
 
         return call_user_func_array($callback, $args);
+    }
+
+    /**
+     * Get factory
+     * @return Factory
+     */
+    private function getFactory()
+    {
+        if (!empty($this->factoryDI)) {
+            $factory = clone $this->factoryDI;
+        } else {
+            $factory = clone $this;
+            $factory->setResults([]);
+        }
+
+        return $factory;
     }
 }
