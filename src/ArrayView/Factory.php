@@ -14,9 +14,9 @@ class Factory
     protected $viewPaths = [];
 
     /**
-     * Factory dependency injection
+     * The view finder implementation.
      */
-    protected $factoryDI = null;
+    protected $finder = null;
 
     /**
      * The extension to engine bindings.
@@ -38,10 +38,10 @@ class Factory
      * @param  array $viewPaths
      * @return void
      */
-    public function __construct($viewPaths = [], $factoryDI = null)
+    public function __construct($viewPaths = [], $finder = null)
     {
         $this->viewPaths = $viewPaths;
-        $this->factoryDI = $factoryDI;
+        $this->finder = $finder;
     }
 
     /**
@@ -124,6 +124,12 @@ class Factory
      */
     public function getViewPath($view)
     {
+        if ($this->finder) {
+            if (file_exists($file = $this->finder->find($view))) {
+                return $file;
+            }
+        }
+
         if (file_exists($view)) {
             return $view;
         } elseif (file_exists($view . '.' . $this->extension)) {
@@ -148,6 +154,12 @@ class Factory
      */
     public function getHelperPath($helper)
     {
+        if ($this->finder) {
+            if (file_exists($file = $this->finder->find($helper))) {
+                return $file;
+            }
+        }
+
         if (file_exists($helper)) {
             return $helper;
         } elseif (file_exists($helper . '.helper.php')) {
@@ -280,12 +292,7 @@ class Factory
      */
     private function getFactory()
     {
-        if (!empty($this->factoryDI)) {
-            $factory = clone $this->factoryDI;
-        } else {
-            $factory = clone $this;
-            $factory->setResults([]);
-        }
+        $factory = new Factory($this->viewPaths, $this->finder);
 
         return $factory;
     }
